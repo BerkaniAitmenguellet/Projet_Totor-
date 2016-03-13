@@ -1,4 +1,4 @@
-package com.example.shad.projetosnomade;
+﻿package com.example.shad.projetosnomade;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -57,25 +57,61 @@ public class IntelligenceWorkoutView extends SurfaceView implements SurfaceHolde
     static final int carteHeight = 5;
     static final int carteTileSize = 200;
     // constante modelisant les differentes types de cases
-    static final int CST_bleu = 0;
+  
+  static final int CST_bleu = 0;
     static final int CST_rouge = 1;
 
     //variable X et Y pour bouger les case
-    int xchange, ychange, x, y, xtemp, ytemp;
+   
+ int xchange, ychange, x, y, xtemp, ytemp;
 
     //variable score
-    private int score;
+    
+private int score;
     private int niv=0;
 //tableau de reference du jeux
-    int[][] niv1 = {
+    
+int[][] niv1 = {
+           
             {CST_bleu, CST_bleu, CST_rouge, CST_bleu, CST_bleu},
+
             {CST_bleu, CST_bleu, CST_rouge, CST_bleu, CST_bleu},
+           
             {CST_rouge, CST_rouge, CST_rouge, CST_rouge, CST_rouge},
+            
             {CST_bleu, CST_bleu, CST_rouge, CST_bleu, CST_bleu},
+           
             {CST_bleu, CST_bleu, CST_bleu, CST_rouge, CST_bleu},
 
     };
-    int[][] mininiv1 = {
+   
+int[][] niv2 = {
+           
+            {CST_bleu, CST_bleu, CST_rouge, CST_bleu, CST_bleu},
+
+            {CST_bleu, CST_bleu, CST_rouge, CST_bleu, CST_bleu},
+           
+            {CST_rouge, CST_rouge, CST_rouge, CST_rouge, CST_rouge},
+            
+            {CST_bleu, CST_bleu, CST_rouge, CST_bleu, CST_bleu},
+           
+            {CST_bleu, CST_bleu, CST_bleu, CST_rouge, CST_bleu},
+
+    };
+int[][] niv3 = {
+           
+            {CST_bleu, CST_bleu, CST_rouge, CST_bleu, CST_bleu},
+
+            {CST_bleu, CST_bleu, CST_rouge, CST_bleu, CST_bleu},
+           
+            {CST_rouge, CST_rouge, CST_rouge, CST_rouge, CST_rouge},
+            
+            {CST_bleu, CST_bleu, CST_rouge, CST_bleu, CST_bleu},
+           
+            {CST_bleu, CST_bleu, CST_bleu, CST_rouge, CST_bleu},
+
+    };
+ int[][] mininiv1 = {
             {CST_bleu, CST_bleu, CST_rouge, CST_bleu, CST_bleu},
             {CST_bleu, CST_bleu, CST_rouge, CST_bleu, CST_bleu},
             {CST_rouge, CST_rouge, CST_rouge, CST_rouge, CST_rouge},
@@ -95,56 +131,80 @@ public class IntelligenceWorkoutView extends SurfaceView implements SurfaceHolde
             {CST_bleu, CST_rouge, CST_bleu, CST_bleu, CST_rouge},
             {CST_bleu, CST_rouge, CST_bleu, CST_rouge, CST_bleu},
             {CST_bleu, CST_bleu, CST_rouge, CST_bleu, CST_bleu},
-            {CST_rouge, CST_bleu, CST_bleu, CST_rouge, CST_bleu},
+                      {CST_rouge, CST_bleu, CST_bleu, CST_rouge, CST_bleu},
             {CST_rouge, CST_bleu, CST_rouge, CST_bleu, CST_bleu},
 
     };
 
 
 
-    // thread utiliser pour animer les zones de depot des diamants
-    private boolean in = true;
+   
+ // thread utiliser pour animer les zones de depot des diamants
+    
+private boolean in = true;
     private Thread cv_thread;
 
-    SurfaceHolder holder;
+    
+SurfaceHolder holder;
 
     Paint paint;
 
 
-    public IntelligenceWorkoutView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+    
+public IntelligenceWorkoutView(Context context, AttributeSet attrs) {
+       
+ super(context, attrs);
         // permet d'ecouter les surfaceChanged, surfaceCreated, surfaceDestroyed
-        holder = getHolder();
-        holder.addCallback(this);
+        
+holder = getHolder();
+        
+holder.addCallback(this);
 
         // chargement des images
-        mContext = context;
-        mRes = mContext.getResources();
-        bleu = BitmapFactory.decodeResource(mRes, R.mipmap.blue);
-        rouge = BitmapFactory.decodeResource(mRes, R.mipmap.red);
-        minibleu = BitmapFactory.decodeResource(mRes, R.mipmap.miniblue);
-        minirouge = BitmapFactory.decodeResource(mRes, R.mipmap.minired);
-        win 		= BitmapFactory.decodeResource(mRes, R.mipmap.win);
+       
+ mContext = context;
+        
+mRes = mContext.getResources();
+       
+ bleu = BitmapFactory.decodeResource(mRes, R.mipmap.blue);
+        
+rouge = BitmapFactory.decodeResource(mRes, R.mipmap.red);
+        
+minibleu = BitmapFactory.decodeResource(mRes, R.mipmap.miniblue);
+        
+minirouge = BitmapFactory.decodeResource(mRes, R.mipmap.minired);
+        
+win 		= BitmapFactory.decodeResource(mRes, R.mipmap.win);
 
-        initparameters();
+        
+initparameters();
         // creation du thread
-        cv_thread = new Thread(this);
+        
+cv_thread = new Thread(this);
         // prise de focus pour gestion des touches
+
         setFocusable(true);
 
     }
 
     // chargement du niveau a partir du tableau de reference du niveau
-    private void loadlevel() {
+    
+private void loadlevel() {
 
-            for (int i = 0; i < carteHeight; i++) {
-                for (int j = 0; j < carteWidth; j++) {
-                    carte[j][i] = niv1[j][i];
+            
+for (int i = 0; i < carteHeight; i++) {
+               
+ for (int j = 0; j < carteWidth; j++) {
+                    
+carte[j][i] = niv1[j][i];
                 }
             }
-            for (int i = 0; i < carteHeightminicarte; i++) {
-                for (int j = 0; j < carteWidthminicarte; j++) {
-                    minicarte[j][i] = mininiv1[j][i];
+           
+ for (int i = 0; i < carteHeightminicarte; i++) {
+                
+for (int j = 0; j < carteWidthminicarte; j++) {
+                  
+  minicarte[j][i] = mininiv1[j][i];
                 }
             }
         }
@@ -163,26 +223,39 @@ public class IntelligenceWorkoutView extends SurfaceView implements SurfaceHolde
             }
     }
     // initialisation du jeu
-    public void initparameters() {
-        paint = new Paint();
-        paint.setColor(0xff0000);
+    
 
-        paint.setDither(true);
-        paint.setColor(0xFFFFFF00);
-        paint.setStyle(Paint.Style.STROKE);
+public void initparameters() {
+        
+paint = new Paint();
+       
+paint.setColor(0xff0000);
 
-        paint.setStrokeCap(Paint.Cap.ROUND);
-        paint.setStrokeWidth(3);
-        paint.setTextAlign(Paint.Align.LEFT);
-        carte = new int[carteHeight][carteWidth];
-        minicarte = new int[carteHeightminicarte][carteWidthminicarte];
-        if(niv==1){
-            score=0;
-            loadlevel2();
+ 
+paint.setDither(true);
+        
+paint.setColor(0xFFFFFF00);
+        
+paint.setStyle(Paint.Style.STROKE);
+
+       
+ paint.setStrokeCap(Paint.Cap.ROUND);
+       
+ paint.setStrokeWidth(3);
+        
+       
+minicarte = new int[carteHeightminicarte][carteWidthminicarte];
+        
+if(niv==1){
+            
+score=0;
+            
+loadlevel2();
         }else {
             loadlevel();
         }
-        carteTopAnchor = (getHeight() - carteHeight * carteTileSize);
+ 
+       carteTopAnchor = (getHeight() - carteHeight * carteTileSize);
         carteLeftAnchor = (getWidth() - carteWidth * carteTileSize) / 2;
         carteTopAnchormincarte = (getHeight() - carteHeightminicarte * carteTileSizeminicarte) - 1350;
         carteLeftAnchorminicarte = (getWidth() - carteWidthminicarte * carteTileSizeminicarte) / 2;
